@@ -1,0 +1,13 @@
+{
+  "employee": {
+    "firstName": "Jean",
+    "lastName": "Dupont",
+    "middleName": "Pierre",
+    "employeeId": "00123"
+  },
+  "candidate": {
+    "firstName": "Marie",
+    "lastName": "Martin",
+    "email": "marie.martin@example.com"
+  }
+}
