@@ -13,14 +13,14 @@ describe('Tests du Dashboard et Navigation', () => {
     cy.contains('My Actions').should('be.visible')
     cy.contains('Quick Launch').should('be.visible')
     cy.contains('Buzz Latest Posts').should('be.visible')
-    
-    //cy.screenshot('dashboard-loaded')
+
   })
 
   it('Devrait naviguer vers la page des employés', () => {
     cy.navigateTo('PIM')
-
-    cy.verifyPageHeader('PIM')
+    cy.get('.oxd-topbar-header-breadcrumb').within(() => {
+      cy.get('.oxd-topbar-header-breadcrumb-module').should('contain', 'PIM')
+    }) 
     cy.get('.oxd-topbar-body-nav-tab').should('contain', 'Configuration')
     cy.get('.orangehrm-paper-container').should('be.visible')
     })
@@ -28,19 +28,11 @@ describe('Tests du Dashboard et Navigation', () => {
   it('Devrait naviguer vers le recrutement', () => {
     cy.navigateTo('Recruitment')
     
-    cy.verifyPageHeader('Recruitment')
+    cy.get('.oxd-topbar-header-breadcrumb').within(() => {
+      cy.get('.oxd-topbar-header-breadcrumb-module').should('contain', 'Recruitment')
+    }) 
     cy.get('.oxd-topbar-body-nav-tab').should('contain', 'Candidates')
     cy.get('.oxd-table-filter').should('be.visible')
-    
-  })
-
-  it.skip('Devrait se déconnecter', () => {
-    cy.get('.oxd-userdropdown-tab').click()
-    cy.contains('Logout').click()
-    cy.wait(2000)
-    // Vérifier la déconnexion
-    cy.url().should('include', '/auth/login')
-    cy.get('.orangehrm-login-branding').should('be.visible')
     
   })
 })

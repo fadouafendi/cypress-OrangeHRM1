@@ -19,6 +19,7 @@ Cypress.Commands.add('navigateTo', (menuItem) => {
 // Vérifier que la page est chargée
 Cypress.Commands.add('verifyPageHeader', (expectedHeader) => {
   cy.get('.oxd-topbar-header-breadcrumb').within(() => {
-    cy.get('.oxd-text').should('contain', expectedHeader)
+    cy.wait(4000)
+    cy.get('.oxd-topbar-header-breadcrumb-level').should('contain', expectedHeader)
   })
 })

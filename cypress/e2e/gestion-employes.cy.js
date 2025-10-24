@@ -1,7 +1,6 @@
-describe('Tests de Gestion des Employés', () => {
+describe('Tests de Gestion des Employés: Ajout, recherche et modification', () => {
   beforeEach(() => {
     cy.goToSite()
-    cy.wait(5000)
     cy.login()
     cy.navigateTo('PIM')
   })
@@ -22,9 +21,10 @@ describe('Tests de Gestion des Employés', () => {
     cy.get('.oxd-toast-container')
       .should('be.visible')
       .and('contain', 'Successfully Saved')
+
+    cy.get('.orangehrm-main-title').should('contain', 'Personal Details')
     
-    cy.verifyPageHeader('Personal Details')
-    
+    // faire un screenshot
     cy.screenshot('employee-added')
   })
 
@@ -36,9 +36,7 @@ describe('Tests de Gestion des Employés', () => {
     // Vérifier les résultats
     cy.get('.oxd-table-row').should('have.length.gt', 0)
     cy.get('.oxd-table-cell').contains('Jean').should('be.visible')
-    
-    cy.screenshot('employee-search')
-  })
+     })
 
   it('Devrait modifier les informations d\'un employé', () => {
     // Rechercher un employé
@@ -56,7 +54,6 @@ describe('Tests de Gestion des Employés', () => {
     // Vérifier la modification
     cy.get('.oxd-toast-container')
       .should('contain', 'Successfully Updated')
-    
-    cy.screenshot('employee-updated')
+
   })
 })

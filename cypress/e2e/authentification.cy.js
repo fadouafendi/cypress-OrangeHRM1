@@ -1,4 +1,5 @@
 describe('Tests d\'Authentification OrangeHRM', () => {
+  let username = "user1"
   beforeEach(() => {
     cy.goToSite()
   })
@@ -17,8 +18,7 @@ describe('Tests d\'Authentification OrangeHRM', () => {
     cy.url().should('include', '/dashboard')
     cy.get('.oxd-topbar-header-breadcrumb').should('be.visible')
     cy.get('.oxd-userdropdown-tab').should('be.visible')
-    
-    //cy.screenshot('login-success')
+
   })
 
   it('Devrait afficher une erreur avec des identifiants invalides', () => {
@@ -30,8 +30,7 @@ describe('Tests d\'Authentification OrangeHRM', () => {
     cy.get('.oxd-alert-content')
       .should('be.visible')
       .and('contain', 'Invalid credentials')
-      
-    //cy.screenshot('login-error')
+
   })
 
   it('Devrait pouvoir réinitialiser le mot de passe', () => {
@@ -42,7 +41,8 @@ describe('Tests d\'Authentification OrangeHRM', () => {
     cy.url().should('include', '/requestPasswordResetCode')
     cy.get('.oxd-text--h6').should('contain', 'Reset Password')
     cy.get('button[type="button"]').contains('Cancel').should('be.visible')
-    
-    //cy.screenshot('reset-password-page')
+    cy.get('.oxd-input--active').type(username)
+    cy.get('.orangehrm-forgot-password-button--reset').click()
+    cy.get('.oxd-text--p').should('contain', 'A reset password link has been sent to you via email.')
   })
 })
